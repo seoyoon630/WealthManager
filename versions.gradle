@@ -1,0 +1,9 @@
+ext {
+    versions = [
+            room_version : '2.2.6'
+    ]
+
+    databaseDependencies = [
+        roomRunTime : 'androidx.room:room-runtime:$room_version'
+    ]
+}
