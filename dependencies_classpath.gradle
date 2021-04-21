@@ -1,0 +1,9 @@
+rootProject.buildscript.repositories {
+    google()
+    jcenter()
+}
+
+rootProject.buildscript.dependencies {
+    classpath rootProject.ext.classpath.kotlin
+    classpath rootProject.ext.classpath.android
+}

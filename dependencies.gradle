@@ -1,0 +1,13 @@
+rootProject.allprojects { project ->
+    if (project.name == 'app') {
+
+        project.afterEvaluate {
+            dependencies {
+                implementation defaultDependencies.values()
+                implementation databaseDependencies.values()
+                kapt kaptDependencies.values()
+                testImplementation testDependencies.values()
+            }
+        }
+    }
+}
