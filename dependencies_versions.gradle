@@ -11,6 +11,7 @@ ext {
             junit_version           : "4.13.2",
             junit_test_version      : "1.1.2",
             espresso_version        : "3.3.0",
+            kotest_version          : "4.4.3"
     ]
 
     classpath = [
@@ -39,7 +40,8 @@ ext {
             junit                   : "junit:junit:$versions.junit_version",
             junitTest               : "androidx.test.ext:junit:$versions.junit_test_version",
             espresso                : "androidx.test.espresso:espresso-core:$versions.espresso_version",
-            roomTest                : "androidx.room:room-testing:$versions.room_version"
+            roomTest                : "androidx.room:room-testing:$versions.room_version",
+            kotest_version          : "io.kotest:kotest-runner-junit5:$versions.kotest_version"
     ]
 }
 //@formatter:on
