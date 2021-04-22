@@ -4,12 +4,6 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import kotlin.math.roundToInt
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-
 class BehaviorTest : BehaviorSpec({
     given("100점이 만점인 상황에서") {
         val totalMarks = 100
