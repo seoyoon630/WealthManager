@@ -37,5 +37,8 @@ android {
         unitTests.all {
             useJUnitPlatform()
         }
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
