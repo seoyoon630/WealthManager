@@ -10,7 +10,7 @@ import kotlin.math.roundToInt
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 
-class MyTests4 : BehaviorSpec({
+class BehaviorTest : BehaviorSpec({
     given("100점이 만점인 상황에서") {
         val totalMarks = 100
         `when`("학생의 점수가") {
@@ -27,8 +27,7 @@ class MyTests4 : BehaviorSpec({
                 then("등급은 C") { getGrade(obtainedMarks, totalMarks) shouldBe "C" }
             }
             and("60점 이상 70점 미만이라면") {
-                val obtainedMarks =
-                    66
+                val obtainedMarks = 66
                 then("등급은 D") { getGrade(obtainedMarks, totalMarks) shouldBe "D" }
             }
             and("60점 미만이라면") {
