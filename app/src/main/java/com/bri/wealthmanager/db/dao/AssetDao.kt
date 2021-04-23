@@ -13,8 +13,11 @@ interface AssetDao {
     fun insert(asset: AssetEntity)
 
     @Update
-    fun update(asset : AssetEntity)
+    fun update(asset: AssetEntity)
 
     @Delete
     fun delete(asset: AssetEntity)
+
+    @Delete
+    fun deleteAll(vararg asset: AssetEntity)
 }

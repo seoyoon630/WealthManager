@@ -1,6 +1,6 @@
 package com.bri.wealthmanager.db
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,11 +16,11 @@ abstract class WealthDatabase : RoomDatabase() {
         const val DATABASE_NAME = "WEALTH"
         private lateinit var sInstance: WealthDatabase
 
-        fun getInstance(application: Application): WealthDatabase {
+        fun getInstance(context: Context): WealthDatabase {
             if (!::sInstance.isInitialized) {
                 synchronized(WealthDatabase::class.java) {
                     if (!::sInstance.isInitialized) {
-                        sInstance = Room.databaseBuilder(application.applicationContext, WealthDatabase::class.java, DATABASE_NAME).build()
+                        sInstance = Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME).build()
                     }
                 }
             }

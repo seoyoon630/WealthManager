@@ -3,7 +3,7 @@ package com.bri.wealthmanager
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
-import org.junit.Assert
+import com.bri.wealthmanager.ui.MainActivity
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
