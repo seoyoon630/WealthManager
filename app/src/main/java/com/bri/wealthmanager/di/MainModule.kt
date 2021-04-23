@@ -1,5 +1,6 @@
 package com.bri.wealthmanager.di
 
+import com.bri.wealthmanager.db.WealthDatabase
 import com.bri.wealthmanager.repo.MainDataSource
 import com.bri.wealthmanager.repo.MainDataSourceImpl
 import com.bri.wealthmanager.repo.MainRepository
@@ -14,7 +15,7 @@ import dagger.hilt.android.components.ViewModelComponent
 class MainModule {
 
     @Provides
-    fun provideMainDataSource() : MainDataSource = MainDataSourceImpl()
+    fun provideMainDataSource(database: WealthDatabase) : MainDataSource = MainDataSourceImpl(database)
 
     @Provides
     fun provideMainRepository(dataSource: MainDataSource) : MainRepository = MainRepositoryImpl(dataSource)
