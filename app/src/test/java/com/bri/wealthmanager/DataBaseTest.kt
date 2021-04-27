@@ -34,8 +34,8 @@ class DataBaseTest {
     @Test
     fun main() {
         데이터베이스_초기화()
-        목록_호출하기()
         데이터_추가하기()
+        목록_호출하기()
     }
 
     private fun 데이터베이스_초기화() {
@@ -46,9 +46,10 @@ class DataBaseTest {
 
     private fun 목록_호출하기() {
         runBlocking {
-                val list = assetDao.getAll()
-                log()
-                assert(list.isEmpty())
+            val list = assetDao.getAll()
+            assert(list.isNotEmpty())
+            log()
+            list.forEach { log(it) }
         }
     }
 
@@ -57,9 +58,8 @@ class DataBaseTest {
             val data = AssetEntity(1, "월급통장", 100000.toDouble())
             assetDao.insert(data)
             val list = assetDao.getAll()
-            list.forEach { log(it) }
+            MatcherAssert.assertThat(list[0], Matchers.`is`(data))
             log()
-            MatcherAssert.assertThat(list[0].id, Matchers.`is`(data.id))
         }
     }
 }
