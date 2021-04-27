@@ -1,45 +1,65 @@
+@file:Suppress("NonAsciiCharacters", "TestFunctionName")
+
 package com.bri.wealthmanager
 
+import android.os.Build
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.bri.wealthmanager.db.WealthDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
-import io.kotest.core.config.AbstractProjectConfig
-import io.kotest.core.extensions.Extension
-import io.kotest.core.spec.Spec
-import io.kotest.core.spec.style.BehaviorSpec
-import io.kotest.extensions.robolectric.RobolectricExtension
-import io.kotest.extensions.robolectric.RobolectricTest
-import io.kotest.matchers.shouldBe
+import com.bri.wealthmanager.db.entity.AssetEntity
+import kotlinx.coroutines.*
+import org.hamcrest.MatcherAssert
+import org.hamcrest.Matchers
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-@RobolectricTest
-class DataBaseTest : BehaviorSpec() {
-
+@ExperimentalCoroutinesApi
+@Config(minSdk = Build.VERSION_CODES.P, maxSdk = Build.VERSION_CODES.P)
+@RunWith(RobolectricTestRunner::class)
+class DataBaseTest {
     private lateinit var mDatabase: WealthDatabase
     private lateinit var assetDao: AssetDao
 
-    override fun beforeSpec(spec: Spec) {
-        super.beforeSpec(spec)
+    @Before
+    fun before() {
         mDatabase = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), WealthDatabase::class.java)
-                .allowMainThreadQueries()
                 .build()
         assetDao = mDatabase.assetDao()
-        println("beforeSpec")
     }
 
-    init {
-        given("데이터베이스 생성") {
-            `when`("목록 가져오기") {
-                and("최초 생성 시") {
-                    val list = assetDao.getAll()
-                    then("목록은 비어있다") { list.size shouldBe 0 }
-                    println("${list.size}")
-                }
-            }
+    @Test
+    fun main() {
+        데이터베이스_초기화()
+        목록_호출하기()
+        데이터_추가하기()
+    }
+
+    private fun 데이터베이스_초기화() {
+        assert(::mDatabase.isInitialized)
+        assert(::assetDao.isInitialized)
+        log()
+    }
+
+    private fun 목록_호출하기() {
+        runBlocking {
+                val list = assetDao.getAll()
+                log()
+                assert(list.isEmpty())
+        }
+    }
+
+    private fun 데이터_추가하기() {
+        runBlocking {
+            val data = AssetEntity(1, "월급통장", 100000.toDouble())
+            assetDao.insert(data)
+            val list = assetDao.getAll()
+            log()
+            MatcherAssert.assertThat(list[0].id, Matchers.`is`(data.id))
         }
     }
 }
 
-class ProjectConfig : AbstractProjectConfig() {
-    override fun extensions(): List<Extension> = super.extensions() + RobolectricExtension()
-}

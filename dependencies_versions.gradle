@@ -16,8 +16,8 @@ ext {
             junit_test_version          : "1.1.2",
             espresso_version            : "3.3.0",
             kotest_version              : "4.4.3",
-            kotest_robolectric_version  : "0.2.1",
             robolectric_version         : "4.4",
+            test_coroutine_version      : "1.4.3",
     ]
 
     classpath = [
@@ -59,8 +59,8 @@ ext {
             espresso                    : "androidx.test.espresso:espresso-core:$versions.espresso_version",
             roomTest                    : "androidx.room:room-testing:$versions.room_version",
             kotest                      : "io.kotest:kotest-runner-junit5:$versions.kotest_version",
-            kotest_robolectric          : "io.kotest.extensions:kotest-extensions-robolectric:$versions.kotest_robolectric_version",
-//            robolectric                 : "org.robolectric:robolectric:$versions.robolectric_version",
+            robolectric                 : "org.robolectric:robolectric:$versions.robolectric_version",
+            test_coroutine              : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.test_coroutine_version"
     ]
 }
 //@formatter:on
