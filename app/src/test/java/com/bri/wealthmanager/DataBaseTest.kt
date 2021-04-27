@@ -57,6 +57,7 @@ class DataBaseTest {
             val data = AssetEntity(1, "월급통장", 100000.toDouble())
             assetDao.insert(data)
             val list = assetDao.getAll()
+            list.forEach { log(it) }
             log()
             MatcherAssert.assertThat(list[0].id, Matchers.`is`(data.id))
         }

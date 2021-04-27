@@ -10,3 +10,7 @@ fun log() {
     } else log.methodName
     println(methodName.replace("_", " ") + " 성공")
 }
+
+fun log(message : Any){
+    println(message.toString())
+}

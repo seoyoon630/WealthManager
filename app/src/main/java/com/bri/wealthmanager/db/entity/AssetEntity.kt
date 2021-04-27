@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.bri.wealthmanager.db.WealthDatabase
 
 @Entity(tableName = WealthDatabase.DATABASE_NAME)
-class AssetEntity(
+data class AssetEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "amount") val amount: Double
