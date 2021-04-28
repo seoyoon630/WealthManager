@@ -16,6 +16,10 @@ class MainActivity : BaseActivity() {
     lateinit var bb: ActivityMainBinding
     override val vm by viewModels<MainViewModel>()
 
+    private val detailContract = registerForActivityResult(DetailContract()) {
+        if (it) vm.getAll()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bb = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -29,9 +33,14 @@ class MainActivity : BaseActivity() {
         bb.list.adapter = AssetAdapter()
 
         vm.startActivity.observe(this) { pair ->
-            startActivity(Intent(this, pair.first).apply {
-                pair.second?.let { bundle -> putExtras(bundle) }
-            })
+            when (pair.first) {
+                DetailActivity::class.java -> detailContract.launch(Unit)
+                else -> {
+                    startActivity(Intent(this, pair.first).apply {
+                        pair.second?.let { bundle -> putExtras(bundle) }
+                    })
+                }
+            }
         }
     }
 }
