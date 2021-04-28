@@ -7,7 +7,7 @@ import com.bri.wealthmanager.db.WealthDatabase
 
 @Entity(tableName = WealthDatabase.DATABASE_NAME)
 data class AssetEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "amount") val amount: Double
+    @ColumnInfo(name = "amount") val amount: Double,
+    @PrimaryKey(autoGenerate = true) val id: Int? = null
 )

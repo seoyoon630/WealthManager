@@ -8,9 +8,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.bri.wealthmanager.db.WealthDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
 import com.bri.wealthmanager.db.entity.AssetEntity
-import kotlinx.coroutines.*
-import org.hamcrest.MatcherAssert
-import org.hamcrest.Matchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -55,10 +54,13 @@ class DataBaseTest {
 
     private fun 데이터_추가하기() {
         runBlocking {
-            val data = AssetEntity(1, "월급통장", 100000.toDouble())
+            val data = AssetEntity( "월급통장", 100000.toDouble())
+            val data2 = AssetEntity( "월급통장", 100000.toDouble())
             assetDao.insert(data)
+            assetDao.insert(data2)
             val list = assetDao.getAll()
-            MatcherAssert.assertThat(list[0], Matchers.`is`(data))
+            assert(list[0].id == 1)
+            assert(list[1].id == 2)
             log()
         }
     }
