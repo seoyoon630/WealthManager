@@ -26,6 +26,8 @@ class MainActivity : BaseActivity() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         bb.vm = vm
+        bb.list.adapter = AssetAdapter()
+
         vm.startActivity.observe(this) { pair ->
             startActivity(Intent(this, pair.first).apply {
                 pair.second?.let { bundle -> putExtras(bundle) }

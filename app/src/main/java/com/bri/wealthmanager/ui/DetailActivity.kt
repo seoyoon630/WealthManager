@@ -3,7 +3,6 @@ package com.bri.wealthmanager.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.and.base.ui.BaseActivity
 import com.bri.wealthmanager.R
