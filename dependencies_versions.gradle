@@ -11,7 +11,6 @@ ext {
             constraint_version          : "2.0.4",
             lottie_version              : "3.7.0",
             room_version                : "2.2.6",
-            logger_version              : "2.2.0",
 
             junit_version               : "4.13.2",
             junit_test_version          : "1.1.2",
@@ -41,10 +40,6 @@ ext {
     databaseDependencies = [
             roomRunTime                 : "androidx.room:room-runtime:$versions.room_version",
             roomKtx                     : "androidx.room:room-ktx:$versions.room_version",
-    ]
-
-    utilDependencies = [
-            logger                      : "com.orhanobut:logger:$versions.logger_version"
     ]
 
     diDependencies = [

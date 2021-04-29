@@ -6,7 +6,6 @@ rootProject.allprojects { project ->
                 implementation defaultDependencies.values()
                 implementation databaseDependencies.values()
                 implementation diDependencies.values()
-                implementation utilDependencies.values()
                 kapt kaptDependencies.values()
                 testImplementation testDependencies.values()
             }

@@ -8,7 +8,6 @@ import com.bri.wealthmanager.R
 import com.bri.wealthmanager.common.AppActivity
 import com.bri.wealthmanager.databinding.ActivityMainBinding
 import com.bri.wealthmanager.vm.MainViewModel
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,13 +22,12 @@ class MainActivity : AppActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bb = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        Logger.w("onCreate MainActivity $vm")
     }
 
     override fun onLoadOnce() {
         super.onLoadOnce()
         bb.vm = vm
+        bb.lifecycleOwner = this
         bb.list.adapter = AssetAdapter { id -> id?.let { detailContract.launch(it) } }
 
         vm.startActivity.observe(this) { pair ->

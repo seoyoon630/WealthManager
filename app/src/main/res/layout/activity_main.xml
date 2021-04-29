@@ -31,7 +31,7 @@
             android:onClick="@{()->vm.startDetailActivity()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:lottie_autoPlay="true"
+            lottie_autoPlay="@{vm.showLottieAnimation}"
             app:lottie_fileName="add.json"
             app:lottie_loop="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>

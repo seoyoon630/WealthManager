@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.and.base.ui.BaseViewModel
+import com.bri.wealthmanager.common.NonNullMutableLiveData
 import com.bri.wealthmanager.common.onProgress
 import com.bri.wealthmanager.db.entity.AssetEntity
 import com.bri.wealthmanager.repo.MainRepository
 import com.bri.wealthmanager.ui.DetailActivity
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,10 +20,11 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _startActivity = MutableLiveData<Pair<Class<*>, Bundle?>>()
     val startActivity: LiveData<Pair<Class<*>, Bundle?>> get() = _startActivity
 
+    val showLottieAnimation = NonNullMutableLiveData(false)
+
     val list = ObservableField<ArrayList<AssetEntity>>(arrayListOf())
 
     init {
-        Logger.w("init MainViewModel $repository")
         getAll()
     }
 
@@ -33,7 +34,10 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     fun getAll() {
         viewModelScope.launch {
-            list.set(repository.getAll())
+            repository.getAll().let {
+                list.set(it)
+                showLottieAnimation.value = it.isEmpty()
+            }
         }.onProgress(_isProgress)
     }
 }
