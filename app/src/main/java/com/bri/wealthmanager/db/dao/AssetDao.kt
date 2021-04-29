@@ -9,6 +9,9 @@ interface AssetDao {
     @Query("SELECT * FROM ${WealthDatabase.DATABASE_NAME} ORDER BY id DESC")
     suspend fun getAll(): List<AssetEntity>
 
+    @Query("SELECT * FROM ${WealthDatabase.DATABASE_NAME} WHERE id == :id")
+    suspend fun get(id : Int) : AssetEntity?
+
     @Insert
     suspend fun insert(asset: AssetEntity)
 
