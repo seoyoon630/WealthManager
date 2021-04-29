@@ -5,7 +5,8 @@ import com.bri.wealthmanager.db.entity.AssetEntity
 
 interface DetailRepository {
     suspend fun insert(title: String, amount: Double)
-    abstract suspend fun get(id: Int): AssetEntity?
+    suspend fun get(id: Int): AssetEntity?
+    suspend fun update(id: Int, name: String, amount: Double)
 }
 
 class DetailRepositoryImpl(private val dataSource: DetailDataSource) : DetailRepository {
@@ -15,5 +16,9 @@ class DetailRepositoryImpl(private val dataSource: DetailDataSource) : DetailRep
 
     override suspend fun get(id: Int): AssetEntity? {
         return dataSource.get(id)
+    }
+
+    override suspend fun update(id: Int, name: String, amount: Double) {
+        return dataSource.update(AssetEntity(name, amount, amount.convertToDisplayAmount(), id))
     }
 }
