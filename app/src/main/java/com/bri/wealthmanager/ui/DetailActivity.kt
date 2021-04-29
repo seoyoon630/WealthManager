@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import com.and.base.ui.BaseActivity
 import com.bri.wealthmanager.R
+import com.bri.wealthmanager.common.AppActivity
 import com.bri.wealthmanager.databinding.ActivityDetailBinding
 import com.bri.wealthmanager.vm.DetailViewModel
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailActivity : BaseActivity() {
+class DetailActivity : AppActivity() {
     lateinit var bb: ActivityDetailBinding
     override val vm by viewModels<DetailViewModel>()
 

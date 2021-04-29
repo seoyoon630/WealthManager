@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.and.base.ui.BaseViewModel
+import com.bri.wealthmanager.common.onProgress
 import com.bri.wealthmanager.db.entity.AssetEntity
 import com.bri.wealthmanager.repo.MainRepository
 import com.bri.wealthmanager.ui.DetailActivity
@@ -33,6 +34,6 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     fun getAll() {
         viewModelScope.launch {
             list.set(repository.getAll())
-        }
+        }.onProgress(_isProgress)
     }
 }
