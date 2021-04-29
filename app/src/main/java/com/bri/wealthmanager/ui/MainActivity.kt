@@ -30,11 +30,11 @@ class MainActivity : AppActivity() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         bb.vm = vm
-        bb.list.adapter = AssetAdapter()
+        bb.list.adapter = AssetAdapter { id -> id?.let { detailContract.launch(it) } }
 
         vm.startActivity.observe(this) { pair ->
             when (pair.first) {
-                DetailActivity::class.java -> detailContract.launch(Unit)
+                DetailActivity::class.java -> detailContract.launch(null)
                 else -> {
                     startActivity(Intent(this, pair.first).apply {
                         pair.second?.let { bundle -> putExtras(bundle) }

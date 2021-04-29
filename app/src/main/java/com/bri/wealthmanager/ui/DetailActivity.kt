@@ -25,11 +25,18 @@ class DetailActivity : AppActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
+        bb.lifecycleOwner = this
         bb.vm = vm
         vm.isSuccess.observe(this) {
             Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
             setResult(RESULT_OK)
             finish()
+        }
+    }
+
+    class EXTRA {
+        companion object {
+            const val ID = "ID"
         }
     }
 }
