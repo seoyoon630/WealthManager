@@ -1,24 +1,24 @@
 package com.bri.wealthmanager.repo
 
 import com.bri.wealthmanager.db.WealthDatabase
-import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.db.data.AssetData
 
 interface DetailDataSource {
-    suspend fun insert(data: AssetEntity)
-    suspend fun get(id: Int): AssetEntity?
-    suspend fun update(data : AssetEntity)
+    suspend fun insert(data: AssetData)
+    suspend fun get(id: Int): AssetData?
+    suspend fun update(data : AssetData)
 }
 
 class DetailDataSourceImpl(private val database: WealthDatabase) : DetailDataSource {
-    override suspend fun insert(data: AssetEntity) {
+    override suspend fun insert(data: AssetData) {
         database.assetDao().insert(data)
     }
 
-    override suspend fun get(id: Int): AssetEntity? {
+    override suspend fun get(id: Int): AssetData? {
         return database.assetDao().get(id)
     }
 
-    override suspend fun update(data : AssetEntity) {
+    override suspend fun update(data : AssetData) {
         return database.assetDao().update(data)
     }
 

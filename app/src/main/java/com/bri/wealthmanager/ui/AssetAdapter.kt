@@ -7,7 +7,7 @@ import com.bri.wealthmanager.R
 import com.bri.wealthmanager.common.AppAdapter
 import com.bri.wealthmanager.common.AppHolder
 import com.bri.wealthmanager.databinding.AssetItemBinding
-import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.entity.AssetEntity
 
 class AssetAdapter(private val showDetail: (id: Int?) -> Unit) : AppAdapter() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppHolder {

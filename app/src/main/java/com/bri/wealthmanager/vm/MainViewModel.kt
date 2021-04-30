@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.and.base.ui.BaseViewModel
 import com.bri.wealthmanager.common.NonNullMutableLiveData
 import com.bri.wealthmanager.common.onProgress
-import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.entity.AssetEntity
 import com.bri.wealthmanager.repo.MainRepository
 import com.bri.wealthmanager.ui.DetailActivity
 import dagger.hilt.android.lifecycle.HiltViewModel

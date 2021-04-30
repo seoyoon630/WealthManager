@@ -9,7 +9,8 @@ import androidx.test.core.app.ApplicationProvider
 import com.bri.wealthmanager.common.convertToDisplayAmount
 import com.bri.wealthmanager.db.WealthDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
-import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.db.data.AssetData
+import com.bri.wealthmanager.entity.convertToEntity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -45,6 +46,8 @@ class DataBaseTest {
         목록_호출하기()
         println("======================================")
         데이터_불러오기()
+        println("======================================")
+        차트데이터_변환()
     }
 
     private fun 데이터베이스_초기화() {
@@ -67,7 +70,7 @@ class DataBaseTest {
             val random = Random(1)
             repeat(10) {
                 val amount = random.nextInt(1, 10000000).absoluteValue.toDouble()
-                val data = AssetEntity("자산$it", amount, amount.convertToDisplayAmount())
+                val data = AssetData("자산$it", amount, amount.convertToDisplayAmount())
                 assetDao.insert(data)
             }
             log()
@@ -89,8 +92,18 @@ class DataBaseTest {
     private fun 데이터_변경하기() {
         runBlocking {
             val data = assetDao.getAll()[3]
-            val update = AssetEntity("변경자산", data.amount, data.displayAmount, data.id)
+            val update = AssetData("변경자산", data.amount, data.displayAmount, data.id)
             assetDao.update(update)
+        }
+    }
+
+    private fun 차트데이터_변환() {
+        runBlocking {
+            val data = assetDao.getAll()
+            val totalAmount = data.map { it.amount }.sum()
+            data.map { it.convertToEntity(totalAmount) }.forEach {
+                println("${it.amount} / $totalAmount -> ${it.pieData.dataSet.getEntryForIndex(0).value}")
+            }
         }
     }
 }

@@ -7,9 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
-import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.db.data.AssetData
 
-@Database(entities = [AssetEntity::class], version = 2)
+@Database(entities = [AssetData::class], version = 2)
 abstract class WealthDatabase : RoomDatabase() {
 
     abstract fun assetDao(): AssetDao
