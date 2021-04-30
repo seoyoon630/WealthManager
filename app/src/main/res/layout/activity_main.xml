@@ -15,15 +15,40 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/total"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:text="@{vm.displayTotal}"
+            android:gravity="center_vertical"
+            android:textColor="@color/main"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="28sp"
+            app:autoSizeMinTextSize="1sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/list"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="총자산 16,000,000원" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="96dp"
             app:data="@{vm.list}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total"
+            tools:itemCount="10"
+            tools:listitem="@layout/asset_item" />
 
         <com.airbnb.lottie.LottieAnimationView
+            lottie_autoPlay="@{vm.showLottieAnimation}"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginEnd="16dp"
@@ -31,7 +56,6 @@
             android:onClick="@{()->vm.startDetailActivity()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            lottie_autoPlay="@{vm.showLottieAnimation}"
             app:lottie_fileName="add.json"
             app:lottie_loop="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ interface MainRepository {
 class MainRepositoryImpl(private val dataSource: MainDataSource) : MainRepository {
     override suspend fun getAll(): ArrayList<AssetEntity> {
         val data = dataSource.getAll()
-        val totalAmount = data.map { it.amount }.sum()
+        val totalAmount = data.sumByDouble { asset -> asset.amount }
         return ArrayList(data.map { it.convertToEntity(totalAmount) })
     }
 }

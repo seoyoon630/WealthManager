@@ -23,6 +23,7 @@ fun PieChart.setChartData(data: PieData) {
     description = null
     legend.isEnabled = false
     holeRadius = 75F
+    animateXY(500, 500)
     setData(data)
     invalidate()
 }

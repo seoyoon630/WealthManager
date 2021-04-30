@@ -100,7 +100,7 @@ class DataBaseTest {
     private fun 차트데이터_변환() {
         runBlocking {
             val data = assetDao.getAll()
-            val totalAmount = data.map { it.amount }.sum()
+            val totalAmount = data.sumByDouble { asset -> asset.amount }
             data.map { it.convertToEntity(totalAmount) }.forEach {
                 println("${it.amount} / $totalAmount -> ${it.pieData.dataSet.getEntryForIndex(0).value}")
             }

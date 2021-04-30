@@ -17,9 +17,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:outlineAmbientShadowColor="@color/text"
+        android:outlineSpotShadowColor="@color/text"
         android:background="@drawable/item_bg"
-        android:elevation="4dp"
-        android:padding="8dp">
+        android:elevation="8dp"
+        android:padding="8dp"
+        tools:ignore="UnusedAttribute">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/chart"
@@ -54,6 +57,7 @@
             android:textStyle="bold"
             android:text="@{data.name}"
             android:textColor="@color/text"
+            android:textSize="40sp"
             app:autoSizeMaxTextSize="20sp"
             app:autoSizeMinTextSize="1sp"
             app:autoSizeTextType="uniform"
