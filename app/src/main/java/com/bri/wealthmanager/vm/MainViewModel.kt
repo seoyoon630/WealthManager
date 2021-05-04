@@ -7,9 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.and.base.ui.BaseViewModel
 import com.bri.wealthmanager.common.NonNullMutableLiveData
-import com.bri.wealthmanager.common.convertToDisplayAmount
 import com.bri.wealthmanager.common.onProgress
-import com.bri.wealthmanager.entity.AssetEntity
 import com.bri.wealthmanager.repo.MainRepository
 import com.bri.wealthmanager.ui.DetailActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,8 +21,7 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     val showLottieAnimation = NonNullMutableLiveData(false)
 
-    val list = ObservableField<ArrayList<AssetEntity>>(arrayListOf())
-    val displayTotal = ObservableField<String>()
+    val list = ObservableField<ArrayList<*>>(arrayListOf<Any>())
 
     init {
         getAll()
@@ -38,7 +35,6 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
         viewModelScope.launch {
             repository.getAll().let {
                 list.set(it)
-                displayTotal.set("총자산 : "+it.sumByDouble { asset -> asset.amount }.convertToDisplayAmount())
                 showLottieAnimation.value = it.isEmpty()
             }
         }.onProgress(_isProgress)

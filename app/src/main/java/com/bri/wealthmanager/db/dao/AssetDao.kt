@@ -6,10 +6,10 @@ import com.bri.wealthmanager.db.data.AssetData
 
 @Dao
 interface AssetDao {
-    @Query("SELECT * FROM ${WealthDatabase.DATABASE_NAME} ORDER BY id DESC")
+    @Query("SELECT * FROM asset ORDER BY id DESC")
     suspend fun getAll(): List<AssetData>
 
-    @Query("SELECT * FROM ${WealthDatabase.DATABASE_NAME} WHERE id == :id")
+    @Query("SELECT * FROM asset WHERE id == :id")
     suspend fun get(id : Int) : AssetData?
 
     @Insert

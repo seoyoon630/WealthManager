@@ -4,39 +4,36 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
 import com.bri.wealthmanager.db.data.AssetData
+import com.bri.wealthmanager.db.data.TypeData
 
-@Database(entities = [AssetData::class], version = 2)
+@Database(entities = [AssetData::class, TypeData::class], version = 1)
 abstract class WealthDatabase : RoomDatabase() {
 
     abstract fun assetDao(): AssetDao
 
     companion object {
-        const val DATABASE_NAME = "WEALTH"
+        private const val DATABASE_NAME = "wealth.db"
         private lateinit var sInstance: WealthDatabase
 
         fun getInstance(context: Context): WealthDatabase {
             if (!::sInstance.isInitialized) {
                 synchronized(WealthDatabase::class.java) {
                     if (!::sInstance.isInitialized) {
-                        sInstance =
-                            Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME)
-                                .addMigrations(MIGRATION_1_2)
+                        sInstance = Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME)
                                 .build()
                     }
                 }
             }
             return sInstance
         }
-
-        private val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE WEALTH ADD COLUMN displayAmount TEXT NOT NULL default '0원'")
-            }
-        }
+//        private val MIGRATION_2_3 = object : Migration(2, 3) {
+//            override fun migrate(database: SupportSQLiteDatabase) {
+//                database.execSQL("")
+//                database.execSQL("ALTER TABLE WEALTH ADD COLUMN type ")
+//            }
+//        }
     }
 
 }
