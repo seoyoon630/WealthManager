@@ -27,8 +27,9 @@ abstract class AppAdapter : RecyclerView.Adapter<AppHolder>() {
         calcDiff(before, mList)
     }
 
-    override fun onBindViewHolder(holder: AppHolder, position: Int) = mList[position]?.let { holder.bind(it) }
-            ?: holder.bind()
+    override fun onBindViewHolder(holder: AppHolder, position: Int) {
+        mList[position]?.let { holder.bind(it) } ?: holder.bind()
+    }
 
     override fun getItemCount(): Int = mList.size
 
@@ -37,15 +38,22 @@ abstract class AppAdapter : RecyclerView.Adapter<AppHolder>() {
         DiffUtil.calculateDiff(callback).dispatchUpdatesTo(this)
     }
 
-    inner class MenuDiffUtilCallBack(private val oldList: List<*>, private val newList: List<*>) : DiffUtil.Callback() {
+    inner class MenuDiffUtilCallBack(private val oldList: List<*>, private val newList: List<*>)
+        : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
         override fun getNewListSize(): Int = newList.size
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = oldList[oldItemPosition] == newList[newItemPosition]
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = areItemsTheSame(oldItemPosition, newItemPosition)
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return areItemsTheSame(oldItemPosition, newItemPosition)
+        }
     }
 }
 
-abstract class AppHolder(open val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+abstract class AppHolder(open val binding: ViewDataBinding)
+    : RecyclerView.ViewHolder(binding.root) {
     open fun bind(item: Any) {}
     open fun bind() {}
 }

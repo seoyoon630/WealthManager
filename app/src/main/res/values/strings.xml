@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WealthManager</string>
+    <string name="total_label">총 자산</string>
 </resources>

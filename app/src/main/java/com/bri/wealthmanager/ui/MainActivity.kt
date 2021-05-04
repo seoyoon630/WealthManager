@@ -33,11 +33,9 @@ class MainActivity : AppActivity() {
         vm.startActivity.observe(this) { pair ->
             when (pair.first) {
                 DetailActivity::class.java -> detailContract.launch(null)
-                else -> {
-                    startActivity(Intent(this, pair.first).apply {
-                        pair.second?.let { bundle -> putExtras(bundle) }
-                    })
-                }
+                else -> startActivity(Intent(this, pair.first).apply {
+                    pair.second?.let { bundle -> putExtras(bundle) }
+                })
             }
         }
     }

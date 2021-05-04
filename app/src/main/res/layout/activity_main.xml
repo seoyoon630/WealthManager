@@ -13,24 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.MainActivity">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/total"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/white"
-            android:elevation="8dp"
-            android:text="@{vm.displayTotal}"
-            android:gravity="center_vertical"
-            android:textColor="@color/main"
-            android:textStyle="bold"
-            app:autoSizeMaxTextSize="28sp"
-            app:autoSizeMinTextSize="1sp"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@id/list"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="총자산 16,000,000원" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
@@ -43,7 +27,7 @@
             app:data="@{vm.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/total"
+            app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="10"
             tools:listitem="@layout/asset_item" />
 
@@ -56,7 +40,6 @@
             android:onClick="@{()->vm.startDetailActivity()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:lottie_fileName="add.json"
-            app:lottie_loop="true" />
+            app:lottie_fileName="add.json"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

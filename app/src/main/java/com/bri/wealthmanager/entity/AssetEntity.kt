@@ -22,7 +22,7 @@ fun AssetData.convertToEntity(totalAmount: Double): AssetEntity {
         add(PieEntry(100 - ratio, ""))
     }
     val set = PieDataSet(entries, "").apply {
-        colors = listOf(Color.parseColor("#FFD862"), Color.parseColor("#EFEEE4"))
+        colors = listOf(Color.parseColor("#1A2E40"), Color.parseColor("#EFEEE4"))
     }
     val data = PieData(set).apply {
         setDrawValues(false)
