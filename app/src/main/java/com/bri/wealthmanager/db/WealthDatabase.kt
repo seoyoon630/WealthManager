@@ -22,6 +22,7 @@ abstract class WealthDatabase : RoomDatabase() {
                 synchronized(WealthDatabase::class.java) {
                     if (!::sInstance.isInitialized) {
                         sInstance = Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME)
+                                .createFromAsset("wealth.db")
                                 .build()
                     }
                 }
