@@ -46,13 +46,10 @@ class DataBaseTest {
         데이터베이스_초기화()
         데이터_추가하기()
         목록_호출하기()
-        println("======================================")
+        차트데이터_변환()
+        데이터_불러오기()
         데이터_변경하기()
         목록_호출하기()
-        println("======================================")
-        데이터_불러오기()
-        println("======================================")
-        차트데이터_변환()
     }
 
     private fun 데이터베이스_초기화() {
@@ -76,7 +73,7 @@ class DataBaseTest {
     private fun 데이터_추가하기() {
         runBlocking {
             val random = Random(1)
-            repeat(10) {
+            repeat(3) {
                 val amount = getRandomDouble()
                 detailRepository.insert("자산$it", amount)
             }
