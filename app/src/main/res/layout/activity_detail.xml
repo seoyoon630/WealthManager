@@ -13,55 +13,85 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="이름"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/name"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="@={vm.name}"
-            app:layout_constraintTop_toBottomOf="@id/name_label" />
+            android:layout_height="0dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            app:layout_constraintBottom_toTopOf="@id/confirm"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/amount_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
-            android:text="금액"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:text="@={vm.amount}"
-            app:layout_constraintTop_toBottomOf="@id/amount_label" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="별칭을 입력해주세요."
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="별칭을 입력해주세요." />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_layout"
+                    style="@style/customTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:hint="별명"
+                    app:layout_constraintTop_toBottomOf="@id/info">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/name"
+                        style="@style/customEditTextStyle"
+                        android:inputType="text"
+                        android:nextFocusDown="@id/amount"
+                        android:text="@={vm.name}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/amount_layout"
+                    style="@style/customTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:hint="잔액"
+                    app:layout_constraintTop_toBottomOf="@id/name_layout">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/amount"
+                        style="@style/customEditTextStyle"
+                        android:inputType="number"
+                        android:nextFocusDown="@id/type"
+                        android:text="@={vm.amount}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/type"
+                    style="@style/customEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:drawableEnd="@drawable/arrow_down"
+                    android:padding="8dp"
+                    android:text="타입 선택"
+                    app:layout_constraintTop_toBottomOf="@id/amount_layout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:background="@drawable/button_bg"
             android:enabled="@{vm.isReadyToConfirm}"
             android:onClick="@{()->vm.confirm()}"
             android:text="확인"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:textColor="@color/c_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:enabled="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

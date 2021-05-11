@@ -72,8 +72,8 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun isValid(): Boolean {
-        val name = name.value ?: ""
-        val amount = amount.value ?: ""
+        val name = name.value
+        val amount = amount.value
         return name.isNotEmpty() && amount.isNotEmpty()
                 && (name != initialName || amount != initialAmount)
     }
