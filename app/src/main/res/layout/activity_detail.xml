@@ -30,12 +30,10 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/info"
+                    style="@style/titleTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="별칭을 입력해주세요."
-                    android:textSize="28sp"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="별칭을 입력해주세요." />
 
@@ -74,9 +72,10 @@
                     style="@style/customEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_marginTop="16dp"
+                    android:onClick="@{()->vm.showCategoryDialog()}"
                     android:drawableEnd="@drawable/arrow_down"
                     android:padding="8dp"
-                    android:text="타입 선택"
+                    android:text="@{vm.categoryName}"
                     app:layout_constraintTop_toBottomOf="@id/amount_layout" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

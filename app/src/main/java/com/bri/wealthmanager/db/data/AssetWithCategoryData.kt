@@ -7,7 +7,7 @@ data class AssetWithCategoryData(
     @Embedded val category: CategoryData,
     @Relation(
         parentColumn = "id",
-        entityColumn = "typeId"
+        entityColumn = "categoryId"
     )
     val assets: List<AssetData>
 )

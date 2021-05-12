@@ -1,4 +1,4 @@
-package com.bri.wealthmanager.ui
+package com.bri.wealthmanager.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

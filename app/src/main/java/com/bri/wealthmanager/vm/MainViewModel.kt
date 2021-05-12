@@ -9,7 +9,7 @@ import com.and.base.ui.BaseViewModel
 import com.bri.wealthmanager.common.NonNullMutableLiveData
 import com.bri.wealthmanager.common.onProgress
 import com.bri.wealthmanager.repo.MainRepository
-import com.bri.wealthmanager.ui.DetailActivity
+import com.bri.wealthmanager.ui.detail.DetailActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,5 +1,6 @@
 package com.bri.wealthmanager.ui
 
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -26,4 +27,9 @@ fun PieChart.setChartData(data: PieData) {
     animateXY(500, 500)
     setData(data)
     invalidate()
+}
+
+@BindingAdapter("app:tint")
+fun ImageView.setTint(color : Int){
+    setColorFilter(color)
 }

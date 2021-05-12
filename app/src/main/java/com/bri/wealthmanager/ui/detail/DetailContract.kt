@@ -1,4 +1,4 @@
-package com.bri.wealthmanager.ui
+package com.bri.wealthmanager.ui.detail
 
 import android.app.Activity
 import android.content.Context

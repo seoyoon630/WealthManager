@@ -1,4 +1,4 @@
-package com.bri.wealthmanager.ui
+package com.bri.wealthmanager.ui.detail
 
 import android.os.Bundle
 import android.widget.Toast
@@ -15,6 +15,8 @@ class DetailActivity : AppActivity() {
     lateinit var bb: ActivityDetailBinding
     override val vm by viewModels<DetailViewModel>()
 
+    private val categoryDialog by lazy { CategoryBottomFragment.newInstance() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bb = DataBindingUtil.setContentView(this, R.layout.activity_detail)
@@ -24,11 +26,19 @@ class DetailActivity : AppActivity() {
         super.onLoadOnce()
         bb.vm = vm
         bb.lifecycleOwner = this
+
+        vm.showCategoryDialog.observe(this) {
+            if (!categoryDialog.isAdded) {
+                categoryDialog.show(supportFragmentManager, null)
+            }
+        }
+
         vm.isSuccess.observe(this) {
             Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
             setResult(RESULT_OK)
             finish()
         }
+
     }
 
     class EXTRA {

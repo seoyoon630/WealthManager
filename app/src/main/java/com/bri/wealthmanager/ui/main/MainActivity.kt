@@ -1,4 +1,4 @@
-package com.bri.wealthmanager.ui
+package com.bri.wealthmanager.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import com.bri.wealthmanager.R
 import com.bri.wealthmanager.common.AppActivity
 import com.bri.wealthmanager.databinding.ActivityMainBinding
+import com.bri.wealthmanager.ui.detail.DetailActivity
+import com.bri.wealthmanager.ui.detail.DetailContract
 import com.bri.wealthmanager.vm.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

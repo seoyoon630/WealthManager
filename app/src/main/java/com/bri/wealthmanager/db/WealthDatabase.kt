@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
+import com.bri.wealthmanager.db.dao.CategoryDao
 import com.bri.wealthmanager.db.data.AssetData
 import com.bri.wealthmanager.db.data.CategoryData
 
@@ -14,6 +15,7 @@ import com.bri.wealthmanager.db.data.CategoryData
 abstract class WealthDatabase : RoomDatabase() {
 
     abstract fun assetDao(): AssetDao
+    abstract fun categoryDao(): CategoryDao
 
     companion object {
         private const val DATABASE_NAME = "wealth.db"
@@ -23,10 +25,8 @@ abstract class WealthDatabase : RoomDatabase() {
             if (!::sInstance.isInitialized) {
                 synchronized(WealthDatabase::class.java) {
                     if (!::sInstance.isInitialized) {
-                        sInstance =
-                            Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME)
-//                                .createFromAsset("wealth.db")
-//                                .fallbackToDestructiveMigration()
+                        sInstance = Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME)
+                                .createFromAsset("wealth.db")
                                 .build()
                     }
                 }
