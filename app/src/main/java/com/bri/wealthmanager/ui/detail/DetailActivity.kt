@@ -12,20 +12,20 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailActivity : AppActivity() {
-    lateinit var bb: ActivityDetailBinding
+    lateinit var binding: ActivityDetailBinding
     override val vm by viewModels<DetailViewModel>()
 
     private val categoryDialog by lazy { CategoryBottomFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bb = DataBindingUtil.setContentView(this, R.layout.activity_detail)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
     }
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        bb.vm = vm
-        bb.lifecycleOwner = this
+        binding.vm = vm
+        binding.lifecycleOwner = this
 
         vm.showCategoryDialog.observe(this) {
             if (!categoryDialog.isAdded) {

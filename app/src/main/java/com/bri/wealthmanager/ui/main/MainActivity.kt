@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppActivity() {
-    lateinit var bb: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     override val vm by viewModels<MainViewModel>()
 
     private val detailContract = registerForActivityResult(DetailContract()) {
@@ -23,14 +23,14 @@ class MainActivity : AppActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bb = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-        bb.vm = vm
-        bb.lifecycleOwner = this
-        bb.list.adapter = AssetAdapter { id -> id?.let { detailContract.launch(it) } }
+        binding.vm = vm
+        binding.lifecycleOwner = this
+        binding.list.adapter = AssetAdapter { id -> id?.let { detailContract.launch(it) } }
 
         vm.startActivity.observe(this) { pair ->
             when (pair.first) {

@@ -8,13 +8,12 @@
 
         <variable
             name="vm"
-            type="com.bri.wealthmanager.vm.DetailViewModel" />
+            type="com.bri.wealthmanager.vm.CategoryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,9 +32,9 @@
                     style="@style/titleTextStyle"
                     android:layout_width="match_parent"
                     android:layout_marginTop="16dp"
-                    android:text="별칭을 입력해주세요."
+                    android:text="카테고리 이름을 입력해주세요."
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="별칭을 입력해주세요." />
+                    tools:text="카테고리 이름을 입력해주세요." />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/name_layout"
@@ -48,36 +47,20 @@
                         android:id="@+id/name"
                         style="@style/customEditTextStyle"
                         android:inputType="text"
-                        android:nextFocusDown="@id/amount"
-                        android:text="@={vm.name}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/amount_layout"
-                    style="@style/customTextInputLayoutStyle"
-                    android:layout_width="match_parent"
-                    android:hint="잔액"
-                    app:layout_constraintTop_toBottomOf="@id/name_layout">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/amount"
-                        style="@style/customEditTextStyle"
-                        android:inputType="number"
-                        android:nextFocusDown="@id/type"
-                        android:text="@={vm.amount}" />
+                        android:nextFocusDown="@id/amount" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/type"
+                    android:id="@+id/color"
                     style="@style/customEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{()->vm.showCategoryDialog()}"
                     android:drawableEnd="@drawable/arrow_down"
+                    android:onClick="@{()->vm.showColorDialog()}"
+                    android:text="색상 선택"
                     android:padding="8dp"
-                    tools:text="카테고리 선택"
-                    android:text="@{vm.categoryName}"
-                    app:layout_constraintTop_toBottomOf="@id/amount_layout" />
+                    app:layout_constraintTop_toBottomOf="@id/name_layout"
+                    tools:text="색상 선택" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
@@ -86,8 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/button_bg"
-            android:enabled="@{vm.isReadyToConfirm}"
-            android:onClick="@{()->vm.confirm()}"
             android:text="확인"
             android:textColor="@color/c_button_text"
             app:layout_constraintBottom_toBottomOf="parent"

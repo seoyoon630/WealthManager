@@ -4,9 +4,9 @@ import android.graphics.Color
 import com.bri.wealthmanager.db.data.CategoryData
 
 data class CategoryEntity(
-    val id: Int,
-    val Color: Int,
-    val name: String
+        val id: Int,
+        val color: Int,
+        val name: String
 )
 
 fun CategoryData.convertToEntity(): CategoryEntity {

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="vm"
-            type="com.bri.wealthmanager.vm.CategoryViewModel" />
+            type="com.bri.wealthmanager.vm.CategoryListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
