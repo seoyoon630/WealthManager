@@ -1,6 +1,7 @@
 package com.bri.wealthmanager.ui.category
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.bri.wealthmanager.R
@@ -30,6 +31,12 @@ class CategoryActivity : AppActivity() {
         vm.showColorDialog.observe(this) {
             if (!colorDialog.isAdded)
                 colorDialog.show(supportFragmentManager, null)
+        }
+
+        vm.isSuccess.observe(this) {
+            Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK)
+            finish()
         }
     }
 }

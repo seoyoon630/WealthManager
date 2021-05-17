@@ -47,7 +47,8 @@
                         android:id="@+id/name"
                         style="@style/customEditTextStyle"
                         android:inputType="text"
-                        android:nextFocusDown="@id/amount" />
+                        android:nextFocusDown="@id/amount"
+                        android:text="@={vm.name}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -57,8 +58,8 @@
                     android:layout_marginTop="16dp"
                     android:drawableEnd="@drawable/arrow_down"
                     android:onClick="@{()->vm.showColorDialog()}"
-                    android:text="색상 선택"
                     android:padding="8dp"
+                    android:text="@={vm.color}"
                     app:layout_constraintTop_toBottomOf="@id/name_layout"
                     tools:text="색상 선택" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -69,6 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/button_bg"
+            android:enabled="@{vm.isReadyToConfirm()}"
+            android:onClick="@{()->vm.confirm()}"
             android:text="확인"
             android:textColor="@color/c_button_text"
             app:layout_constraintBottom_toBottomOf="parent"

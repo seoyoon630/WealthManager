@@ -11,5 +11,5 @@ interface CategoryDao {
     suspend fun getCategories() : List<CategoryData>
 
     @Insert
-    suspend fun addCategory(category : CategoryData)
+    suspend fun insert(category : CategoryData)
 }

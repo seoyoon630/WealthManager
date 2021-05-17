@@ -1,9 +1,11 @@
 package com.bri.wealthmanager.ui
 
+import android.graphics.Color
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
+import com.and.base.log.Log
 import com.bri.wealthmanager.common.AppAdapter
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -32,4 +34,10 @@ fun PieChart.setChartData(data: PieData) {
 @BindingAdapter("app:tint")
 fun ImageView.setTint(color : Int){
     setColorFilter(color)
+}
+
+@BindingAdapter("app:tint")
+fun ImageView.setTint(color : String?){
+    Log.w("setTint(String) : $color")
+    color?.let { setColorFilter(Color.parseColor(color)) }
 }
