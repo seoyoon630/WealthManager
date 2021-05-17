@@ -14,14 +14,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: DetailRepository,
-    private val savedStateHandle: SavedStateHandle,
+        private val repository: DetailRepository,
+        private val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
     val id by lazy { savedStateHandle.get<Int>(DetailActivity.EXTRA.ID) }
 
     private var initialName: String = ""
     private var initialAmount: String = ""
-    private var category : CategoryEntity? = null
+    private var category: CategoryEntity? = null
 
     val name = NonNullMutableLiveData("")
     val amount = NonNullMutableLiveData("")
@@ -36,7 +36,7 @@ class DetailViewModel @Inject constructor(
     val isSuccess: LiveData<Boolean> get() = _isSuccess
 
     private val _showCategoryDialog = MutableLiveData<Event<Unit>>()
-    val showCategoryDialog : LiveData<Event<Unit>> get() = _showCategoryDialog
+    val showCategoryDialog: LiveData<Event<Unit>> get() = _showCategoryDialog
 
     init {
         viewModelScope.launch {
@@ -59,7 +59,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             kotlin.runCatching {
                 id?.let { repository.update(it, name.value, amount.value.toDouble()) }
-                    ?: run { throw Exception("Id not exist.") }
+                        ?: run { throw Exception("Id not exist.") }
                 _isSuccess.value = true
             }.onFailure {
                 it.printStackTrace()
@@ -88,10 +88,10 @@ class DetailViewModel @Inject constructor(
     }
 
     fun showCategoryDialog() {
-         _showCategoryDialog.value = Event(Unit)
+        _showCategoryDialog.value = Event(Unit)
     }
 
-    fun selectCategory(category : CategoryEntity) {
+    fun selectCategory(category: CategoryEntity) {
         this.category = category
         categoryName.value = category.name
     }

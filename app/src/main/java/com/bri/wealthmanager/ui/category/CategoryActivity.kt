@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import com.bri.wealthmanager.R
 import com.bri.wealthmanager.common.AppActivity
 import com.bri.wealthmanager.databinding.ActivityCategoryBinding
-import com.bri.wealthmanager.ui.detail.CategoryBottomFragment
 import com.bri.wealthmanager.vm.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

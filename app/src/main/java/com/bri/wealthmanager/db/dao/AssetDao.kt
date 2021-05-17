@@ -14,7 +14,7 @@ interface AssetDao {
     suspend fun getAllWithCategory(): List<AssetWithCategoryData>
 
     @Query("SELECT * FROM asset WHERE id == :id")
-    suspend fun get(id : Int) : AssetData?
+    suspend fun get(id: Int): AssetData?
 
     @Insert
     suspend fun insert(asset: AssetData)

@@ -15,8 +15,8 @@ import dagger.hilt.android.components.ViewModelComponent
 class MainModule {
 
     @Provides
-    fun provideMainDataSource(database: WealthDatabase) : MainDataSource = MainDataSourceImpl(database)
+    fun provideMainDataSource(database: WealthDatabase): MainDataSource = MainDataSourceImpl(database)
 
     @Provides
-    fun provideMainRepository(dataSource: MainDataSource) : MainRepository = MainRepositoryImpl(dataSource)
+    fun provideMainRepository(dataSource: MainDataSource): MainRepository = MainRepositoryImpl(dataSource)
 }

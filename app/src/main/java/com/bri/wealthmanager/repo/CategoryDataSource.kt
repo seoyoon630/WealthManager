@@ -4,7 +4,7 @@ import com.bri.wealthmanager.db.WealthDatabase
 import com.bri.wealthmanager.db.data.CategoryData
 
 interface CategoryDataSource {
-    suspend fun getCategories() : List<CategoryData>
+    suspend fun getCategories(): List<CategoryData>
     suspend fun insert(categoryData: CategoryData)
 
 }

@@ -14,5 +14,5 @@ class DatabaseModule {
 
     @Provides
     fun provideWealthDataBase(@ApplicationContext context: Context): WealthDatabase =
-        WealthDatabase.getInstance(context)
+            WealthDatabase.getInstance(context)
 }

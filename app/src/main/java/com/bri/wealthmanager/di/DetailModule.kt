@@ -14,8 +14,8 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class DetailModule {
     @Provides
-    fun provideDetailDataSource(database: WealthDatabase) : DetailDataSource = DetailDataSourceImpl(database)
+    fun provideDetailDataSource(database: WealthDatabase): DetailDataSource = DetailDataSourceImpl(database)
 
     @Provides
-    fun provideDetailRepository(dataSource: DetailDataSource) : DetailRepository = DetailRepositoryImpl(dataSource)
+    fun provideDetailRepository(dataSource: DetailDataSource): DetailRepository = DetailRepositoryImpl(dataSource)
 }

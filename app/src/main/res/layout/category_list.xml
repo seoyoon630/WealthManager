@@ -5,6 +5,7 @@
     tools:ignore="HardcodedText">
 
     <data>
+
         <variable
             name="vm"
             type="com.bri.wealthmanager.vm.CategoryListViewModel" />
@@ -13,8 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@drawable/rounding_bottomsheet_bg">
+        android:background="@drawable/rounding_bottomsheet_bg"
+        android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
@@ -25,11 +26,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/list"
-            android:orientation="vertical"
             android:layout_marginTop="8dp"
+            android:orientation="vertical"
             app:data="@{vm.categoryList}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/title"

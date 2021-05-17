@@ -1,6 +1,5 @@
 package com.bri.wealthmanager.vm
 
-import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -62,8 +61,8 @@ class CategoryViewModel @Inject constructor(private val repository: CategoryRepo
     private fun isValid(): Boolean {
         val name = name.value
         val color = color.value
-        return name.isNotEmpty() && color.isNotEmpty()
-                && (name != initialName || color != initialColor)
+        return name.isNotEmpty() && name != initialName
+                && color.isNotEmpty() && color != initialColor
     }
 
 }

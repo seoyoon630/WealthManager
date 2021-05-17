@@ -72,12 +72,12 @@
                     style="@style/customEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_marginTop="16dp"
-                    android:onClick="@{()->vm.showCategoryDialog()}"
                     android:drawableEnd="@drawable/arrow_down"
+                    android:onClick="@{()->vm.showCategoryDialog()}"
                     android:padding="8dp"
-                    tools:text="카테고리 선택"
                     android:text="@{vm.categoryName}"
-                    app:layout_constraintTop_toBottomOf="@id/amount_layout" />
+                    app:layout_constraintTop_toBottomOf="@id/amount_layout"
+                    tools:text="카테고리 선택" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

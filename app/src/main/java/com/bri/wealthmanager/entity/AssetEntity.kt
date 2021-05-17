@@ -7,12 +7,12 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 
 data class AssetEntity(
-    val name: String,
-    val amount: Double,
-    val displayAmount: String,
-    val id: Int? = null,
-    val ratio: String,
-    val pieData: PieData
+        val name: String,
+        val amount: Double,
+        val displayAmount: String,
+        val id: Int? = null,
+        val ratio: String,
+        val pieData: PieData
 )
 
 fun AssetData.convertToEntity(totalAmount: Double): AssetEntity {

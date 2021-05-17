@@ -6,13 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.bri.wealthmanager.R
-import com.bri.wealthmanager.databinding.CategoryListBinding
 import com.bri.wealthmanager.databinding.ColorListBinding
-import com.bri.wealthmanager.vm.CategoryListViewModel
 import com.bri.wealthmanager.vm.CategoryViewModel
-import com.bri.wealthmanager.vm.DetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,7 +1,6 @@
 package com.bri.wealthmanager.repo
 
 import com.bri.wealthmanager.common.convertToDisplayAmount
-import com.bri.wealthmanager.entity.AssetEntity
 import com.bri.wealthmanager.entity.convertToEntity
 
 interface MainRepository {
@@ -12,7 +11,7 @@ class MainRepositoryImpl(private val dataSource: MainDataSource) : MainRepositor
     override suspend fun getAll(): ArrayList<*> {
         val data = dataSource.getAll()
         val totalAmount = data.sumByDouble { asset -> asset.amount }
-        val result =  ArrayList<Any>(data.map { it.convertToEntity(totalAmount) })
+        val result = ArrayList<Any>(data.map { it.convertToEntity(totalAmount) })
         result.add(0, totalAmount.convertToDisplayAmount())
         return result
     }

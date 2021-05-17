@@ -8,8 +8,8 @@ import com.bri.wealthmanager.db.data.CategoryData
 @Dao
 interface CategoryDao {
     @Query("SELECT * FROM category")
-    suspend fun getCategories() : List<CategoryData>
+    suspend fun getCategories(): List<CategoryData>
 
     @Insert
-    suspend fun insert(category : CategoryData)
+    suspend fun insert(category: CategoryData)
 }

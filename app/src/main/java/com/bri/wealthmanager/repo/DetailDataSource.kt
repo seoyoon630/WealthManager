@@ -6,7 +6,7 @@ import com.bri.wealthmanager.db.data.AssetData
 interface DetailDataSource {
     suspend fun insert(data: AssetData)
     suspend fun get(id: Int): AssetData?
-    suspend fun update(data : AssetData)
+    suspend fun update(data: AssetData)
 }
 
 class DetailDataSourceImpl(private val database: WealthDatabase) : DetailDataSource {
@@ -18,7 +18,7 @@ class DetailDataSourceImpl(private val database: WealthDatabase) : DetailDataSou
         return database.assetDao().get(id)
     }
 
-    override suspend fun update(data : AssetData) {
+    override suspend fun update(data: AssetData) {
         return database.assetDao().update(data)
     }
 

@@ -11,7 +11,7 @@ interface DetailRepository {
 
 class DetailRepositoryImpl(private val dataSource: DetailDataSource) : DetailRepository {
     override suspend fun insert(title: String, amount: Double) {
-        dataSource.insert(AssetData(0,title, amount, amount.convertToDisplayAmount()))
+        dataSource.insert(AssetData(0, title, amount, amount.convertToDisplayAmount()))
     }
 
     override suspend fun get(id: Int): AssetData? {

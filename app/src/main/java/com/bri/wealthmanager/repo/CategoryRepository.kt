@@ -6,7 +6,7 @@ import com.bri.wealthmanager.entity.convertToEntity
 
 interface CategoryRepository {
     suspend fun getCategories(): ArrayList<CategoryEntity>
-    suspend fun insert(name : String, color : String)
+    suspend fun insert(name: String, color: String)
 }
 
 class CategoryRepositoryImpl(private val dataSource: CategoryDataSource) : CategoryRepository {

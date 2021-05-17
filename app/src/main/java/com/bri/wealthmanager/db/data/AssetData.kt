@@ -3,7 +3,6 @@ package com.bri.wealthmanager.db.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.bri.wealthmanager.db.WealthDatabase
 
 @Entity(tableName = "asset")
 data class AssetData(

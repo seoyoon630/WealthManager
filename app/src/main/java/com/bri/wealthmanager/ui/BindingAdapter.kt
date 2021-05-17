@@ -32,12 +32,12 @@ fun PieChart.setChartData(data: PieData) {
 }
 
 @BindingAdapter("app:tint")
-fun ImageView.setTint(color : Int){
+fun ImageView.setTint(color: Int) {
     setColorFilter(color)
 }
 
 @BindingAdapter("app:tint")
-fun ImageView.setTint(color : String?){
+fun ImageView.setTint(color: String?) {
     Log.w("setTint(String) : $color")
     color?.let { setColorFilter(Color.parseColor(color)) }
 }
