@@ -1,8 +1,9 @@
 package com.bri.wealthmanager.db.dao
 
 import androidx.room.*
+import com.bri.wealthmanager.db.data.AssetAndCategoryData
 import com.bri.wealthmanager.db.data.AssetData
-import com.bri.wealthmanager.db.data.AssetWithCategoryData
+import com.bri.wealthmanager.db.data.CategoryWithAssetsData
 
 @Dao
 interface AssetDao {
@@ -11,10 +12,10 @@ interface AssetDao {
 
     @Transaction
     @Query("SELECT * FROM category")
-    suspend fun getAllWithCategory(): List<AssetWithCategoryData>
+    suspend fun getAllWithCategory(): List<CategoryWithAssetsData>
 
     @Query("SELECT * FROM asset WHERE id == :id")
-    suspend fun get(id: Int): AssetData?
+    suspend fun get(id: Int): AssetAndCategoryData?
 
     @Insert
     suspend fun insert(asset: AssetData)

@@ -5,6 +5,7 @@ import com.and.base.common.Event
 import com.and.base.ui.BaseViewModel
 import com.bri.wealthmanager.common.NonNullMutableLiveData
 import com.bri.wealthmanager.common.onProgress
+import com.bri.wealthmanager.db.data.CategoryData
 import com.bri.wealthmanager.entity.CategoryEntity
 import com.bri.wealthmanager.repo.DetailRepository
 import com.bri.wealthmanager.ui.detail.DetailActivity
@@ -19,17 +20,20 @@ class DetailViewModel @Inject constructor(
 ) : BaseViewModel() {
     val id by lazy { savedStateHandle.get<Int>(DetailActivity.EXTRA.ID) }
 
-    private var initialName: String = ""
-    private var initialAmount: String = ""
-    private var category: CategoryEntity? = null
+    private var initialName: String? = null
+    private var initialAmount: String? = null
+    private var initialCategory: CategoryEntity? = null
+
+    private var categoryId: Int? = null
 
     val name = NonNullMutableLiveData("")
     val amount = NonNullMutableLiveData("")
-    val categoryName = NonNullMutableLiveData("카테고리 선택")
+    val category = MutableLiveData<CategoryEntity>(null)
 
     val isReadyToConfirm = MediatorLiveData<Boolean>().apply {
         addSource(name) { this.value = isValid() }
         addSource(amount) { this.value = isValid() }
+        addSource(category) { this.value = isValid() }
     }
 
     private val _isSuccess = MutableLiveData<Boolean>()
@@ -42,10 +46,12 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             id?.let {
                 repository.get(it)?.let { data ->
-                    name.value = data.name
-                    amount.value = data.amount.toString()
-                    initialName = data.name
-                    initialAmount = data.amount.toString()
+                    name.value = data.asset.name
+                    amount.value = data.asset.amount.toString()
+                    category.value = data.category
+                    initialName = data.asset.name
+                    initialAmount = data.asset.amount.toString()
+                    initialCategory = data.category
                 }
             }
         }.onProgress(_isProgress)
@@ -58,7 +64,7 @@ class DetailViewModel @Inject constructor(
     private fun update() {
         viewModelScope.launch {
             kotlin.runCatching {
-                id?.let { repository.update(it, name.value, amount.value.toDouble()) }
+                id?.let { repository.update(it, name.value, amount.value.toDouble(), categoryId) }
                         ?: run { throw Exception("Id not exist.") }
                 _isSuccess.value = true
             }.onFailure {
@@ -71,7 +77,7 @@ class DetailViewModel @Inject constructor(
     private fun insert() {
         viewModelScope.launch {
             runCatching {
-                repository.insert(name.value, amount.value.toDouble())
+                repository.insert(name.value, amount.value.toDouble(), categoryId)
                 _isSuccess.value = true
             }.onFailure {
                 it.printStackTrace()
@@ -83,8 +89,8 @@ class DetailViewModel @Inject constructor(
     private fun isValid(): Boolean {
         val name = name.value
         val amount = amount.value
-        return name.isNotEmpty() && amount.isNotEmpty()
-                && (name != initialName || amount != initialAmount)
+        return name.isNotEmpty() && amount.isNotEmpty() && categoryId != null &&
+                (name != initialName || amount != initialAmount || categoryId != initialCategory?.id)
     }
 
     fun showCategoryDialog() {
@@ -92,7 +98,6 @@ class DetailViewModel @Inject constructor(
     }
 
     fun selectCategory(category: CategoryEntity) {
-        this.category = category
-        categoryName.value = category.name
+        this.category.value = category
     }
 }

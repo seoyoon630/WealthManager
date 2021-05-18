@@ -1,6 +1,7 @@
 package com.bri.wealthmanager.ui
 
 import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -40,4 +41,9 @@ fun ImageView.setTint(color: Int) {
 fun ImageView.setTint(color: String?) {
     Log.w("setTint(String) : $color")
     color?.let { setColorFilter(Color.parseColor(color)) }
+}
+
+@BindingAdapter("app:visible")
+fun View.setVisible(visible : Boolean){
+    visibility = if(visible) View.VISIBLE else View.GONE
 }
