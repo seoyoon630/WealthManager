@@ -8,7 +8,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.bri.wealthmanager.common.convertToDisplayAmount
 import com.bri.wealthmanager.db.WealthDatabase
-import com.bri.wealthmanager.entity.AssetEntity
+import com.bri.wealthmanager.data.Asset
 import com.bri.wealthmanager.repo.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -75,7 +75,7 @@ class DataBaseTest {
             val random = Random(1)
             repeat(3) {
                 val amount = getRandomDouble()
-                detailRepository.insert("자산$it", amount)
+//                detailRepository.insert("자산$it", amount)
             }
             log()
         }
@@ -97,7 +97,7 @@ class DataBaseTest {
         runBlocking {
             detailRepository.get(1)?.let { data ->
                 val amount = getRandomDouble()
-                detailRepository.update(data.id, "변경자산", amount)
+//                detailRepository.update(data.id, "변경자산", amount)
                 log()
             }
         }
@@ -107,7 +107,7 @@ class DataBaseTest {
         runBlocking {
             val data = mainRepository.getAll()
             data.forEach {
-                if (it is AssetEntity) {
+                if (it is Asset) {
                     println("${it.amount.convertToDisplayAmount()} (${it.ratio})")
                 }
             }

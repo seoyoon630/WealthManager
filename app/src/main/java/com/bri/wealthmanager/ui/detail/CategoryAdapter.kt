@@ -6,13 +6,13 @@ import androidx.databinding.DataBindingUtil
 import com.bri.wealthmanager.R
 import com.bri.wealthmanager.common.AppAdapter
 import com.bri.wealthmanager.common.AppHolder
+import com.bri.wealthmanager.data.Category
 import com.bri.wealthmanager.databinding.CategoryAddItemBinding
 import com.bri.wealthmanager.databinding.CategoryItemBinding
-import com.bri.wealthmanager.entity.CategoryEntity
 
 class CategoryAdapter(
         private val addCategory: () -> Unit,
-        private val selectCategory: (category: CategoryEntity) -> Unit) : AppAdapter() {
+        private val selectCategory: (category: Category) -> Unit) : AppAdapter() {
 
     override fun set(pList: ArrayList<*>) {
         val list = arrayListOf<Any?>().apply {
@@ -35,7 +35,7 @@ class CategoryAdapter(
     override fun getItemViewType(position: Int): Int {
         return when {
             mList[position] == null -> 0
-            mList[position] is CategoryEntity -> 1
+            mList[position] is Category -> 1
             else -> throw Exception("CategoryAdapter : Wrong Data ${mList[position]}")
         }
     }
@@ -49,7 +49,7 @@ class CategoryAdapter(
 
     inner class CategoryHolder(override val binding: CategoryItemBinding) : AppHolder(binding) {
         override fun bind(item: Any) {
-            (item as? CategoryEntity)?.let {
+            (item as? Category)?.let {
                 binding.root.setOnClickListener { _ -> selectCategory(it) }
                 binding.data = it
             }

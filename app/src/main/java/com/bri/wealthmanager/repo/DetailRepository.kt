@@ -1,31 +1,34 @@
 package com.bri.wealthmanager.repo
 
 import com.bri.wealthmanager.common.convertToDisplayAmount
-import com.bri.wealthmanager.db.data.AssetAndCategoryData
-import com.bri.wealthmanager.db.data.AssetData
-import com.bri.wealthmanager.entity.AssetAndCategoryEntity
-import com.bri.wealthmanager.entity.convertToEntity
+import com.bri.wealthmanager.data.Asset
+import com.bri.wealthmanager.data.Category
+import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.db.entity.CategoryEntity
+import com.bri.wealthmanager.db.entity.map
 
 interface DetailRepository {
-    suspend fun insert(title: String, amount: Double, categoryId: Int?)
-    suspend fun get(id: Int): AssetAndCategoryEntity?
-    suspend fun update(id: Int, name: String, amount: Double, categoryId: Int?)
+    suspend fun insert(name: String, amount: Double, category: Category?)
+    suspend fun get(id: Int): Asset?
+    suspend fun update(id: Int, name: String, amount: Double, category: Category?)
 }
 
 class DetailRepositoryImpl(private val dataSource: DetailDataSource) : DetailRepository {
-    override suspend fun insert(title: String, amount: Double, categoryId: Int?) {
-        if (categoryId == null) return
-        val data = AssetData(categoryId, title, amount, amount.convertToDisplayAmount())
-        dataSource.insert(data)
+    override suspend fun insert(name: String, amount: Double, category: Category?) {
+        if (category == null) throw Exception("Asset Insert : category can not be null.")
+        val categoryEntity = CategoryEntity(category.name, category.color, category.id)
+        val entity = AssetEntity(name, amount, amount.convertToDisplayAmount(), categoryEntity)
+        dataSource.insert(entity)
     }
 
-    override suspend fun get(id: Int): AssetAndCategoryEntity? {
-        return dataSource.get(id)?.convertToEntity()
+    override suspend fun get(id: Int): Asset? {
+        return dataSource.get(id)?.map()
     }
 
-    override suspend fun update(id: Int, name: String, amount: Double, categoryId: Int?) {
-        if (categoryId == null) return
-        val data = AssetData(categoryId, name, amount, amount.convertToDisplayAmount(), id)
-        dataSource.update(data)
+    override suspend fun update(id: Int, name: String, amount: Double, category: Category?) {
+        if (category == null) throw Exception("Asset Update : category can not be null.")
+        val categoryEntity = CategoryEntity(category.name, category.color, category.id)
+        val entity = AssetEntity(name, amount, amount.convertToDisplayAmount(), categoryEntity)
+        dataSource.update(entity)
     }
 }

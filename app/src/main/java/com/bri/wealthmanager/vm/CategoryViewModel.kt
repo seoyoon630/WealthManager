@@ -1,5 +1,6 @@
 package com.bri.wealthmanager.vm
 
+import android.graphics.Color
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -49,7 +50,7 @@ class CategoryViewModel @Inject constructor(private val repository: CategoryRepo
     private fun insert() {
         viewModelScope.launch {
             runCatching {
-                repository.insert(name.value, color.value)
+                repository.insert(name.value, Color.parseColor(color.value))
                 _isSuccess.value = true
             }.onFailure {
                 it.printStackTrace()

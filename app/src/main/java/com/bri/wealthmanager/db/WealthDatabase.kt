@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bri.wealthmanager.db.dao.AssetDao
 import com.bri.wealthmanager.db.dao.CategoryDao
-import com.bri.wealthmanager.db.data.AssetData
-import com.bri.wealthmanager.db.data.CategoryData
+import com.bri.wealthmanager.db.entity.AssetEntity
+import com.bri.wealthmanager.db.entity.CategoryEntity
 
-@Database(entities = [AssetData::class, CategoryData::class], version = 1)
+@Database(entities = [AssetEntity::class, CategoryEntity::class], version = 1)
 abstract class WealthDatabase : RoomDatabase() {
 
     abstract fun assetDao(): AssetDao
@@ -24,7 +24,7 @@ abstract class WealthDatabase : RoomDatabase() {
                 synchronized(WealthDatabase::class.java) {
                     if (!::sInstance.isInitialized) {
                         sInstance = Room.databaseBuilder(context, WealthDatabase::class.java, DATABASE_NAME)
-                                .createFromAsset("wealth.db")
+//                                .createFromAsset("wealth.db")
                                 .build()
                     }
                 }

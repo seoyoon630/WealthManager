@@ -1,31 +1,25 @@
 package com.bri.wealthmanager.db.dao
 
 import androidx.room.*
-import com.bri.wealthmanager.db.data.AssetAndCategoryData
-import com.bri.wealthmanager.db.data.AssetData
-import com.bri.wealthmanager.db.data.CategoryWithAssetsData
+import com.bri.wealthmanager.db.entity.AssetEntity
 
 @Dao
 interface AssetDao {
     @Query("SELECT * FROM asset ORDER BY id DESC")
-    suspend fun getAll(): List<AssetData>
-
-    @Transaction
-    @Query("SELECT * FROM category")
-    suspend fun getAllWithCategory(): List<CategoryWithAssetsData>
+    suspend fun getAll(): List<AssetEntity>
 
     @Query("SELECT * FROM asset WHERE id == :id")
-    suspend fun get(id: Int): AssetAndCategoryData?
+    suspend fun get(id: Int): AssetEntity?
 
     @Insert
-    suspend fun insert(asset: AssetData)
+    suspend fun insert(asset: AssetEntity)
 
     @Update
-    suspend fun update(asset: AssetData)
+    suspend fun update(asset: AssetEntity)
 
     @Delete
-    suspend fun delete(asset: AssetData)
+    suspend fun delete(asset: AssetEntity)
 
     @Delete
-    suspend fun deleteAll(vararg asset: AssetData)
+    suspend fun deleteAll(vararg asset: AssetEntity)
 }

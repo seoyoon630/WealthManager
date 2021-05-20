@@ -1,21 +1,25 @@
-package com.bri.wealthmanager.entity
+package com.bri.wealthmanager.db.entity
 
 import android.graphics.Color
-import com.bri.wealthmanager.db.data.AssetData
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.bri.wealthmanager.data.Asset
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 
+@Entity(tableName = "asset")
 data class AssetEntity(
         val name: String,
         val amount: Double,
-        val displayAmount: String,
-        val id: Int? = null,
-        val ratio: String,
-        val pieData: PieData
+        @ColumnInfo(name = "display_amount") val displayAmount: String,
+        @Embedded val category: CategoryEntity,
+        @PrimaryKey(autoGenerate = true) val id: Int = 0,
 )
 
-fun AssetData.convertToEntity(totalAmount: Double): AssetEntity {
+fun AssetEntity.map(totalAmount: Double = amount): Asset {
     val ratio = (amount / totalAmount * 100).toFloat()
     val entries = ArrayList<PieEntry>().apply {
         add(PieEntry(ratio, ""))
@@ -27,5 +31,5 @@ fun AssetData.convertToEntity(totalAmount: Double): AssetEntity {
     val data = PieData(set).apply {
         setDrawValues(false)
     }
-    return AssetEntity(name, amount, displayAmount, id, "${ratio.toInt()}%", data)
+    return Asset(id, name, amount, displayAmount, category.map(), "${ratio.toInt()}%", data)
 }

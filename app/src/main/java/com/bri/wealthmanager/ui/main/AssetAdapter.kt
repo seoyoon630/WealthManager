@@ -8,7 +8,7 @@ import com.bri.wealthmanager.common.AppAdapter
 import com.bri.wealthmanager.common.AppHolder
 import com.bri.wealthmanager.databinding.AssetItemBinding
 import com.bri.wealthmanager.databinding.TotalItemBinding
-import com.bri.wealthmanager.entity.AssetEntity
+import com.bri.wealthmanager.data.Asset
 
 class AssetAdapter(private val showDetail: (id: Int?) -> Unit) : AppAdapter() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppHolder {
@@ -23,7 +23,7 @@ class AssetAdapter(private val showDetail: (id: Int?) -> Unit) : AppAdapter() {
     override fun getItemViewType(position: Int): Int {
         return when (mList[position]) {
             is String -> 0
-            is AssetEntity -> 1
+            is Asset -> 1
             else -> throw Exception("AssetAdapter : Wrong Data ${mList[position]}")
         }
     }
@@ -37,7 +37,7 @@ class AssetAdapter(private val showDetail: (id: Int?) -> Unit) : AppAdapter() {
     inner class AssetHolder(override val binding: AssetItemBinding) :
             AppHolder(binding) {
         override fun bind(item: Any) {
-            (item as? AssetEntity)?.let {
+            (item as? Asset)?.let {
                 binding.data = it
                 binding.root.setOnClickListener { _ -> showDetail(it.id) }
             }

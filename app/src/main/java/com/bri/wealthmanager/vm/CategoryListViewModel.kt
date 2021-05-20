@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.and.base.log.Log
 import com.and.base.ui.BaseViewModel
-import com.bri.wealthmanager.entity.CategoryEntity
+import com.bri.wealthmanager.data.Category
 import com.bri.wealthmanager.repo.CategoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,7 +14,7 @@ import javax.inject.Inject
 class CategoryListViewModel @Inject constructor(private val repository: CategoryRepository)
     : BaseViewModel() {
 
-    val categoryList = MutableLiveData<ArrayList<CategoryEntity>>(ArrayList())
+    val categoryList = MutableLiveData<ArrayList<Category>>(ArrayList())
 
     init {
         Log.w("CategoryViewModel initialized")

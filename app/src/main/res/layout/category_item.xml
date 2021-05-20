@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.bri.wealthmanager.entity.CategoryEntity" />
+            type="com.bri.wealthmanager.data.Category" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
